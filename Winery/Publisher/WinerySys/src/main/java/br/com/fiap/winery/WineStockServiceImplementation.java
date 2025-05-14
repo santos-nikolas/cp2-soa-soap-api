@@ -1,10 +1,12 @@
 package br.com.fiap.winery;
 
-public class WineStockServiceImplementation implements WineStockService {
+import jakarta.jws.WebService; // Importação necessária
 
-    @Override // Boa prática, indica que estamos sobrescrevendo um método da interface
+@WebService(endpointInterface = "br.com.fiap.winery.WineStockService")
+public class WineStockServiceImplementation implements WineStockService {
+    // ... (corpo da classe com os métodos implementados)
+    @Override
     public String getMenu() {
-        // Simples lista de vinhos como String
         StringBuilder menu = new StringBuilder();
         menu.append("--- Menu de Vinhos ---\n");
         menu.append("Tintos:\n");
@@ -19,5 +21,9 @@ public class WineStockServiceImplementation implements WineStockService {
         return menu.toString();
     }
 
-    // Método placeOrder ainda precisa ser implementado
+    @Override
+    public String placeOrder(String name, int quantity) {
+        System.out.println("Pedido recebido: " + quantity + "x " + name);
+        return "Pedido confirmado para " + quantity + "x " + name + "!";
+    }
 }
